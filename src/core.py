@@ -1,14 +1,14 @@
 import os
+import tensorflow as tf
+from module.gan import AutoCNN
+import random
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-import tensorflow as tf
 
 tf.get_logger().setLevel('INFO')
 
-from auto_cnn.gan import AutoCNN
 
-import random
 
 random.seed(42)
 tf.random.set_seed(42)

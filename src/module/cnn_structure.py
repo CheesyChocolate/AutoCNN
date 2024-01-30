@@ -63,7 +63,6 @@ class SkipLayer(Layer):
         skip_layer = tf.keras.layers.Conv2D(self.feature_size1, self.kernel, self.stride, self.convolution,
                                             name=f'{group_name}/Conv1')(inputs)
 
-        # FIXME is it the activation first or the batch norm?
         skip_layer = tf.keras.layers.BatchNormalization(name=f'{group_name}/BatchNorm1')(skip_layer)
         skip_layer = tf.keras.layers.Activation('relu', name=f'{group_name}/ReLU1')(skip_layer)
 
@@ -71,7 +70,6 @@ class SkipLayer(Layer):
                                             name=f'{group_name}/Conv2')(skip_layer)
         skip_layer = tf.keras.layers.BatchNormalization(name=f'{group_name}/BatchNorm2')(skip_layer)
 
-        # Makes sure that the dimensionality at the skip layers are the same
         inputs = tf.keras.layers.Conv2D(self.feature_size2, (1, 1), self.stride, name=f'{group_name}/Reshape')(inputs)
 
         outputs = tf.keras.layers.add([inputs, skip_layer], name=f'{group_name}/Add')
@@ -164,7 +162,6 @@ class CNN:
 
         self.model: tf.keras.Model = None
 
-        # TODO change this so that the checkpoint works no matter when you change layer
         self.checkpoint_filepath = f'{self.checkpoint_dir}/model_{self.hash}/model_{self.hash}'
         model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
             filepath=self.checkpoint_filepath,
@@ -191,7 +188,7 @@ class CNN:
         print(self.layers)
 
         if self.model is None:
-            tf.keras.backend.clear_session()  # Fixes graph appending
+            tf.keras.backend.clear_session()
             SkipLayer.GROUP_NUMBER = 1
             inputs = tf.keras.Input(shape=self.input_shape)
 
@@ -203,7 +200,6 @@ class CNN:
             outputs = self.output_function(outputs)
 
             self.model = tf.keras.Model(inputs=inputs, outputs=outputs)
-            # self.model.summary()
             self.model.compile(self.optimizer, loss=self.loss, metrics=self.metrics)
 
             SkipLayer.GROUP_NUMBER = 1

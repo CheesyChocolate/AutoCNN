@@ -7,7 +7,7 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.python.keras.optimizer_v2.optimizer_v2 import OptimizerV2
 
-from auto_cnn.cnn_structure import SkipLayer, PoolingLayer, CNN, Layer
+from .cnn_structure import SkipLayer, PoolingLayer, CNN, Layer
 
 
 class AutoCNN:
@@ -188,7 +188,6 @@ class AutoCNN:
 
         for cnn in population:
             if cnn.hash not in self.fitness:
-                # TODO make this work on multiple GPUs simultaneously
                 self.evaluate_individual_fitness(cnn)
 
             print(cnn, self.fitness[cnn.hash])
