@@ -1,20 +1,24 @@
-import setuptools
+#!/usr/bin/env python
+
+from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
-    long_description = fh.read()
+    readme = fh.read()
 
-setuptools.setup(
+with open('LICENSE') as f:
+    license = f.read()
+
+setup(
     name="auto_cnn",
     version="1.0",
-    author="Marius Juston",
-    author_email="marius.juston@hotmail.fr",
+    author="Suren Lockwood",
+    author_email="dev@behnamlal.xyz",
     description="Automatically designing CNN architectures using Genetic Algorithm for Image Classification "
                 "implementation",
-    long_description=long_description,
+    long_description=readme,
     long_description_content_type="text/markdown",
-    url="https://github.com/Marius-Juston/AutoCNN",
-    packages=setuptools.find_packages(),
-    install_requires=['tensorflow>=2.0.0'],
+    url="https://github.com/CheesyChocolate//AutoCNN",
+    packages=find_packages(exclude=('tests', 'docs')),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -28,4 +32,8 @@ setuptools.setup(
         'Topic :: Scientific/Engineering :: Image Processing'
     ],
     python_requires='>=3.6',
+    install_requires=[
+        'tensorflow>=2.0.0'
+        'numpy>=1.22.0',
+        ],
 )
