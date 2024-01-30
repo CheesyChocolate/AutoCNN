@@ -148,7 +148,7 @@ class CNN:
         self.loss = loss
 
         if optimizer is None:
-            self.optimizer = tf.keras.optimizers.Adam()
+            self.optimizer = tf.keras.optimizers.legacy.Adam()
         else:
             self.optimizer = optimizer
 

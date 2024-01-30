@@ -51,7 +51,7 @@ class AutoCNN:
                  dataset: Dict[str, Any],
                  output_layer: Callable[[tf.keras.layers.Layer], tf.keras.layers.Layer] = None,
                  epoch_number: int = 1,
-                 optimizer: OptimizerV2 = tf.keras.optimizers.Adam(),
+                 optimizer: OptimizerV2 = tf.keras.optimizers.legacy.Adam(),
                  loss: Union[str, tf.keras.losses.Loss] = 'sparse_categorical_crossentropy',
                  metrics: Iterable[str] = ('accuracy',),
                  crossover_probability: float = .9,
