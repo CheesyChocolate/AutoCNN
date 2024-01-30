@@ -1,23 +1,7 @@
 # AutoCNN
 
-<p align="center">
-    <a href="https://github.com/Marius-Juston/AutoCNN/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/Marius-Juston/AutoCNN" /></a>
-    <a href="https://github.com/Marius-Juston/AutoCNN/pulse" alt="Activity">
-        <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Marius-Juston/AutoCNN"></a>
-    <a href="https://github.com/Marius-Juston/AutoCNN/stargazers">
-        <img alt="Stars" src="https://img.shields.io/github/stars/Marius-Juston/AutoCNN"></a>
-    <a href="https://github.com/Marius-Juston/AutoCNN/network/members">
-        <img alt="Forks" src="https://img.shields.io/github/forks/Marius-Juston/AutoCNN"></a>
-    <a href="https://github.com/Marius-Juston/AutoCNN/issues">
-        <img alt="Issues" src="https://img.shields.io/github/issues/Marius-Juston/AutoCNN"></a>
-    <a href="./LICENSE" alt="Activity">
-        <img alt="GitHub" src="https://img.shields.io/github/license/Marius-Juston/AutoCNN"></a>
-</p>
-
-
 This project is an implementation of the paper ["Automatically Designing CNN Architectures Using
-Genetic Algorithm for Image Classification"](https://paperswithcode.com/paper/automatically-designing-cnn-architectures) 
+Genetic Algorithm for Image Classification"](https://paperswithcode.com/paper/automatically-designing-cnn-architectures)
 
 ## How it works
 
@@ -81,7 +65,7 @@ To do this the algorithm follows these steps:
         - randomly select 2 CNN, add the one with the highest fitness to the list
     - Look at if the CNN from the offspring and parent population was placed in the new population
         - if it is not replace the worst CNN by the best
-6. Repeat step 2. 
+6. Repeat step 2.
 
 ### Installation
 
@@ -110,15 +94,15 @@ tf.random.set_seed(42)
 
 
 def mnist_test():
-    # Loads the data as test and train 
+    # Loads the data as test and train
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.mnist.load_data()
 
-    # Puts the data in a dictionary for the algorithm to use  
+    # Puts the data in a dictionary for the algorithm to use
     data = {'x_train': x_train, 'y_train': y_train, 'x_test': x_test, 'y_test': y_test}
 
-    # Sets the wanted parameters  
+    # Sets the wanted parameters
     a = AutoCNN(population_size=5, maximal_generation_number=4, dataset=data, epoch_number=5)
-    
+
     # Runs the algorithm until the maximal_generation_number has been reached
     best_cnn = a.run()
     print(best_cnn)
