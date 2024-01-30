@@ -197,14 +197,16 @@ class AutoCNN:
         """
         Evaluates the fitness of the CNN. The fitness is based on the accuracy of the CNN on the test data.
 
-        Does not re-evaluate the fitness it is already in the fitness cache.
+        Does not re-evaluate the fitness if it is already in the fitness cache.
 
-        Once the fitness have been calculated adds it to the fitness cache and saves it to the fitness cache json
+        Once the fitness has been calculated, adds it to the fitness cache and saves it to the fitness cache JSON.
+
+        Resets the TensorFlow graph before evaluating the fitness to avoid the mentioned error.
 
         :param cnn: the CNN to find the fitness of
         """
-
         try:
+            tf.keras.backend.clear_session()  # Reset TensorFlow graph
             cnn.generate()
 
             cnn.train(self.dataset, epochs=self.epoch_number)
